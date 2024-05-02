@@ -1,4 +1,4 @@
-# Simple Thread Pool Library
+# Thread Pool Library
 
 A lightweight header-only C++11 library that provides a simple and efficient way to manage and execute tasks in parallel using a thread pool.
 
@@ -10,7 +10,7 @@ Simply include the `ThreadPool.hpp` header file in your project.
 ```
 
 ## Example
-The following example demonstrates how to use the Simple Thread Pool Library to calculate the sum of integers in the range [0, 1e9) modulo (1e9 + 7) using 6 threads.
+The following example demonstrates how to use this library to calculate the sum of integers in the range [0, 1e9) modulo (1e9 + 7) using 6 threads.
 
 ```cpp
 #include <iostream>
