@@ -1,27 +1,27 @@
 # Simple Thread Pool Library
 
-The Simple Thread Pool Library is a lightweight header-only C++ library that provides a simple and efficient way to manage and execute tasks in parallel using a thread pool.
+A lightweight header-only C++11 library that provides a simple and efficient way to manage and execute tasks in parallel using a thread pool.
 
 ## Getting Started
-To use the Simple Thread Pool Library, simply include the `SimpleThreadPool.hpp` header file in your project.
+Simply include the `ThreadPool.hpp` header file in your project.
 
 ```cpp
-#include "SimpleThreadPool.hpp"
+#include "ThreadPool.hpp"
 ```
 
 ## Example
-The following example demonstrates how to use the Simple Thread Pool Library to calculate the sum of the first 1000 natural numbers in parallel.
+The following example demonstrates how to use the Simple Thread Pool Library to calculate the sum of integers in the range [0, 1e9) modulo (1e9 + 7) using 6 threads.
 
 ```cpp
 #include <iostream>
-#include "SimpleThreadPool.hpp"
+#include "ThreadPool.hpp"
 
 int main() {
-    // Create a thread pool with 4 threads
-    SimpleThreadPool threadPool(4);
+    // Create a thread pool with 6 threads
+    ThreadPool threadPool(6);
 
     // Define a task that calculates the sum of integers in the range [start, end) modulo (1e9 + 7)
-    constexpr auto sumTask = [](std::uint64_t start, std::uint64_t end, std::atomic<int>& result) {
+    auto sumTask = [](std::uint64_t start, std::uint64_t end, std::atomic<int>& result) {
         int sum = 0;
         for (std::uint64_t i = start; i < end; ++i) {
             sum = (sum + i) % 1000000007;

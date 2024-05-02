@@ -8,11 +8,11 @@
 #include <functional>
 #include <condition_variable>
 
-class SimpleThreadPool {
+class ThreadPool {
 public:
     using Task = std::function<void()>;
 
-    SimpleThreadPool(uint8_t num_threads) {
+    ThreadPool(uint8_t num_threads) {
         threads.reserve(num_threads);
         for (uint8_t i = 0; i < num_threads; ++i) {
             threads.push_back(std::thread([this] { threadHandler(); }));
@@ -40,10 +40,10 @@ public:
         tasksWaitCV.wait(taskQueueLock, [this] { return taskQueue.empty() && tasksInProgress == 0; });
     }
 
-    SimpleThreadPool(const SimpleThreadPool&) = delete;
-    SimpleThreadPool& operator=(const SimpleThreadPool&) = delete;
+    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool& operator=(const ThreadPool&) = delete;
 
-    ~SimpleThreadPool() noexcept {
+    ~ThreadPool() noexcept {
         stopProcessing();
         for (auto& thread: threads) {
             thread.join();
